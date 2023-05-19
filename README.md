@@ -14,7 +14,7 @@ I setup cloud based SIEM (Azure Sentinel) and connect it to a live virtual machi
 
 - <b>Windows 10</b>
 
-<h2>Program walk-through:</h2>
+<h2>Project walk-through:</h2>
 
 <p align="center">
 Creating Virtual Machine (Exposed): <br/>
