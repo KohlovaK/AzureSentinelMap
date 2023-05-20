@@ -16,12 +16,20 @@ I setup cloud based SIEM (Azure Sentinel) and connect it to a live virtual machi
 
 <h2>Project walk-through:</h2>
 
-<p align="center">
-Creating Virtual Machine (Exposed): <br/>
+<b>Creating Virtual Machine (Exposed):</b> <br/>
+First, I created exposed virtual machine, which is supossed to be discovered easily on the Internet, so people from other countries can try to attack it. Virtual machine is named "Honeypot1".
+
 <img src="https://snipboard.io/ARryaO.jpg" height="80%" width="80%" alt="VM"/>
-<img src="https://snipboard.io/Q3fNRw.jpg" height="80%" width="80%" alt="ports"/>
+
+Then, instead of using default firewall, I created the new one, which is opened to everything coming from the Internet to my virtual machine.
+<br/>
+
+<img src="https://snipboard.io/Q3fNRw.jpg" height="80%" width="80%" alt="firewall"/>
 <br />
-<br />
-Creating Log Analytics Workspace:  <br/>
+
+<b>Creating Log Analytics Workspace:</b>  <br/>
+I created and connected logs with my virtual machine. The goal of these logs is to monitor from which countries are the attackers coming. Later I will connect the logs with Sentinel to display locations of the attacks. Log Analytics Workspace is named "lawHoneypot1".
+
+<img src="https://snipboard.io/szok1j.jpg" height="80%" width="80%" alt="log"/>
 <br />
 <br />
