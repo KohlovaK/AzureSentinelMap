@@ -66,7 +66,7 @@ Here we can see which Account was the attacker trying to use, why log in process
 <br />
 
 <b>Using ipgeolocation.io:</b>  <br/>
-For finding out more specific information about the country, latitude, longtitude etc. about the attacker I used ipgeolocation.io. I just pasted the address of the attacker and could see this:
+For finding out more specific information about the country, latitude, longitude etc. about the attacker I used ipgeolocation.io. I just pasted the address of the attacker and could see this:
 <img src="https://snipboard.io/qC237l.jpg" height="80%" width="80%" alt="ipgeolocation_show"/>
 
 For later, it is necessary to get geolocation API key (to get geo data) - after signing up into ipgeolocation.io, I got my API key.
