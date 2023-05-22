@@ -31,5 +31,27 @@ Then, instead of using default firewall, I created the new one, which is opened 
 I created and connected logs with my virtual machine. The goal of these logs is to monitor from which countries are the attackers coming. Later I will connect the logs with Sentinel to display locations of the attacks. Log Analytics Workspace is named "lawHoneypot1".
 
 <img src="https://snipboard.io/szok1j.jpg" height="80%" width="80%" alt="log"/>
+
+Enabling ability to gather logs from my Virtual Machine into Logs Analytics Workspace.
+<img src="https://snipboard.io/Qme3nM.jpg" height="80%" width="80%" alt="gather_logs"/>
+<br />
+In Data Collection I chose the option to collect all events.
+<img src="https://snipboard.io/CgT2yA.jpg" height="80%" width="80%" alt="collect_all"/>
+
+Connecting Log Analytics Workspace with Virtual Machine.
+<img src="https://snipboard.io/24rEdb.jpg" height="80%" width="80%" alt="connection"/>
+
+<b>Azure Sentinel Setup:</b>  <br/>
+
+I created Azure Sentinel and added it to my Log Analytics Workspace - "lawHoneypot1".
+<img src="https://snipboard.io/fodaKW.jpg" height="80%" width="80%" alt="sentinel"/>
+
+<b>Logging into VM with Remote Desktop:</b>  <br/>
+
+I coppied Public IP address of VM which I will use for log in via Remote Desktop.
+<img src="https://snipboard.io/MZouJe.jpg" height="80%" width="80%" alt="copy_IP"/>
+
+Then I paste this IP address into Remote Desktop Connection and logged into VM.
+<img src="https://snipboard.io/TzvR4S.jpg" height="80%" width="80%" alt="remote"/>
 <br />
 <br />
