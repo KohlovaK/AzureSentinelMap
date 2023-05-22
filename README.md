@@ -59,12 +59,13 @@ On Event Viewer on VM we can already see some attacks (Audit Failure) happening 
 <br />
 
 Example of Log Failure:
+
 <img src="https://snipboard.io/iXu4gy.jpg" height="80%" width="80%" alt="event_log_detail"/>
 <br />
 Here we can see which Account was the attacker trying to use, why log in process failed and also the address from the attacker. However, it is not visible here, from which country the attacker is, and the other information.
+<br />
 
 <b>Using ipgeolocation.io:</b>  <br/>
-
 For finding out more specific information about the country, latitude, longtitude etc. about the attacker I used ipgeolocation.io. I just pasted the address of the attacker and could see this:
 <img src="https://snipboard.io/qC237l.jpg" height="80%" width="80%" alt="ipgeolocation_show"/>
 
@@ -77,7 +78,15 @@ To make VM more discoverable on the Internet, I turned off Windows firewall - on
 
 <b>Downloading Powershell Script:</b>  <br/>
 
-I coppied the Powershell script from Github link from Josh Madakor (the creator of the tutorial) and pasted it into Powershell ISE on my VM. I pasted my API key (which I mentioned above) into the script and then run it. The script looks through Event Viewer, grabs all the events which falied to log in, takes their IP addresses and geo data, and creates the new log file. This will be saved in the log file named: "failed_rdp.log". When script runs we can see the "purple" outputs, which represent failed events.
+I coppied the Powershell script from Github link from Josh Madakor (the creator of the tutorial) and pasted it into Powershell ISE on my VM. I pasted my API key (which I mentioned above) into the script and then run it. The script looks through Event Viewer, grabs all the events which falied to log in (Event ID 4625), takes their IP addresses, sends them to ipgeolocation.io, gets geo data and creates the new log file, named: "failed_rdp.log", where we can see the data. When script runs we can see the "purple" outputs, which represent failed events.
 <img src="https://snipboard.io/PYBRkF.jpg" height="80%" width="80%" alt="powershell"/>
+
+<b>Creating Custom Log in Log Analytics Workspace</b>  <br/>
+
+In "lawHoneypot1" I went to "Tables" and created new custom log. To create it, I added "failed_rdp.log" log file. That will be used for training Log Analytics, how to get geo data from the file.
+<img src="https://snipboard.io/zdOCMr.jpg" height="80%" width="80%" alt="custom_log"/>
+
+Then we can see the logs in "Log" section when I run the query.
+<img src="https://snipboard.io/MXjeRE.jpg" height="80%" width="80%" alt="custom_log"/>
 <br />
 <br />
