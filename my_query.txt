@@ -1,3 +1,10 @@
+//comments
+//my query to create custom columns from RawData column
+//first I splitted RawData by ,
+//timestamp column contains :, so I separated it first, before replacing : with ,
+//then I replaced : with ,
+// as everything is now separated by , we can use indexes to extract data we want
+
 FAILED_RDP_WITH_GEO_CL
 | extend CSVFields0 = split(RawData, ',')
 | extend Timestamp = todatetime(CSVFields0[8]) 
@@ -12,6 +19,7 @@ FAILED_RDP_WITH_GEO_CL
 | extend Country = tostring(CSVFields1[13]) 
 | extend Label = tostring(CSVFields1[15]) 
 
+//query from Josh Madakor to be used in Sentinel
 | summarize event_count=count() by Sourcehost, Latitude, Longitude, Country, Label, Destinationhost
 | where Destinationhost != "samplehost"
 | where Sourcehost != ""
