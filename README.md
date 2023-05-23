@@ -54,7 +54,7 @@ I created Azure Sentinel and added it to my Log Analytics Workspace - "lawHoneyp
 <img src="https://snipboard.io/fodaKW.jpg" height="80%" width="80%" alt="sentinel"/>
 
 <b>4. Logging into VM with Remote Desktop:</b>  <br/>
-I coppied Public IP address of VM which I will use to log in via Remote Desktop.
+I copied Public IP address of VM which I will use to log in via Remote Desktop.
 
 <img src="https://snipboard.io/MZouJe.jpg" height="80%" width="80%" alt="copy_IP"/>
 
@@ -85,7 +85,7 @@ To make VM more discoverable on the Internet, I turned off Windows firewall - on
 <img src="https://snipboard.io/1yUhjT.jpg" height="80%" width="80%" alt="turningOff_firewall"/>
 
 <b>7. Downloading Powershell Script:</b>  <br/>
-I coppied the Powershell script from <a href="https://github.com/joshmadakor1/Sentinel-Lab/blob/main/Custom_Security_Log_Exporter.ps1">Github link</a> from Josh Madakor (the creator of the tutorial) and pasted it into Powershell ISE on my VM. I pasted my API key (which I mentioned above) into the script and then run it. The script looks through Event Viewer, grabs all the events which falied to log in (Event ID 4625), takes their IP addresses, sends them to ipgeolocation.io, gets geo data and creates the new log file, named: "failed_rdp.log", where we can see the data. When script runs we can see the "purple" outputs, which represent failed events.
+I copied the Powershell script from <a href="https://github.com/joshmadakor1/Sentinel-Lab/blob/main/Custom_Security_Log_Exporter.ps1">Github link</a> from Josh Madakor (the creator of the tutorial) and pasted it into Powershell ISE on my VM. I pasted my API key (which I mentioned above) into the script and then run it. The script looks through Event Viewer, grabs all the events which falied to log in (Event ID 4625), takes their IP addresses, sends them to ipgeolocation.io, gets geo data and creates the new log file, named: "failed_rdp.log", where we can see the data. When script runs we can see the "purple" outputs, which represent failed events.
 
 <img src="https://snipboard.io/PYBRkF.jpg" height="80%" width="80%" alt="powershell"/>
 
