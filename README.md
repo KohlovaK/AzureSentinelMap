@@ -1,9 +1,9 @@
 <h1>Azure Sentinel Map with Live Attacks(SIEM)</h1>
 
 <h2>Description</h2>
-I set up cloud based SIEM (Azure Sentinel) and connected it to a live virtual machine acting as a honey pot. Then, I was monitoring live attacks (Remote Desktop Protocol Brute Force) from all the world through logs (which collect information such are IP adresses, countries, credentials which attackers tried to use for log in etc.). I used a custom PowerShell script to see geolocation information of the attackers, and plotted it on the Azure Sentinel Map. As the data is displayed on a map, it is easy to see where these attacks are coming from. 
+I set up a cloud based SIEM (Azure Sentinel) and connected it to a live virtual machine acting as a honey pot. Then, I was monitoring live attacks (Remote Desktop Protocol Brute Force) from all the world through logs (which collect information such are IP adresses, countries, credentials which attackers tried to use for log in etc.). I used a custom PowerShell script to see geolocation information of the attackers, and plotted it on the Azure Sentinel Map. As the data is displayed on a map, it is easy to see where these attacks are coming from. 
 <br />
-In this project I did not only learned how to set this up, but it is also a strong reminder, that anything published on the Internet can be vulnerable and the attackers will try to take an advantage of it, no matter who you are, you will always be a target. The other reminder is to use strong credentials, strong passwords and obviously not to use "admin" as a username as the most of attackers tried to use this one. It is also crucial to setup firewalls properly, so they are not opened to everything coming from the Internet.
+In this project I did not only learned how to set this up, but it is also a strong reminder, that anything published on the Internet can be vulnerable and the attackers will try to take advantage of it, no matter who you are, you will always be a target. The other reminder is to use strong credentials, strong passwords and obviously not to use "admin" as a username as the most of attackers tried to use this one. It is also crucial to se tup firewalls properly, so they are not open to everything coming from the Internet.
 <br />
 
 <h2>Tutorial from:</h2>
@@ -12,7 +12,7 @@ For this project I followed the SIEM tutorial from Josh Madakor, the whole tutor
 
 <h2>Languages and Utilities Used</h2>
 
-- <b>Miscrosoft Azure (Virtual Machines, Log Analytics, Sentinel)</b>
+- <b>Microsoft Azure (Virtual Machines, Log Analytics, Sentinel)</b>
 - <b>PowerShell</b> 
 - <b>KQL</b> 
 
@@ -23,11 +23,11 @@ For this project I followed the SIEM tutorial from Josh Madakor, the whole tutor
 <h2>Project walk-through:</h2>
 
 <b>1. Creating Virtual Machine (Exposed):</b> <br/>
-First, I created an exposed virtual machine (VM), which is supossed to be discovered easily on the Internet, so people from the other countries can try to attack it. Virtual machine is named "Honeypot1".
+First, I created an exposed virtual machine (VM), which is supossed to be discovered easily on the Internet, so attackers can find it. Virtual machine is named "Honeypot1".
 
 <img src="https://snipboard.io/ARryaO.jpg" height="80%" width="80%" alt="VM"/>
 
-Then, instead of using a default firewall, I created the new one, which is opened to everything coming from the Internet to my virtual machine.
+Then, instead of using a default firewall, I created the new one, which is open to everything coming from the Internet to my virtual machine.
 
 <img src="https://snipboard.io/Q3fNRw.jpg" height="80%" width="80%" alt="firewall"/>
 
@@ -98,7 +98,7 @@ Then we can see the logs in "Log" section, after I run the query with the name o
 
 <img src="https://snipboard.io/MXjeRE.jpg" height="80%" width="80%" alt="run_query"/>
 
-The "RawData" column contains the needed information. Therefore, I extracted information like country, state etc. from it. As the tutorial from Josh was created 2 years ago, and Micsrosoft Azure no loger supports custom fields feature, I came up with the following solution all by myself: I wrote the query in KQL (Kusto Query Language) to separate data included in "RawData" column and created more separated columns, which will be used for a visualization.
+The "RawData" column contains the needed information. Therefore, I extracted information like country, state etc. from it. As the tutorial from Josh was created 2 years ago, and Micsrosoft Azure no loger supports custom fields feature, I came up with the following solution by myself: I wrote the query in KQL (Kusto Query Language) to separate data included in "RawData" column and created more separated columns, which will be used for a visualization.
 
 <img src="https://snipboard.io/YQRupo.jpg" height="80%" width="80%" alt="query"/>
 
