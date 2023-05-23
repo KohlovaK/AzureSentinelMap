@@ -1,0 +1,17 @@
+FAILED_RDP_WITH_GEO_CL
+| extend CSVFields0 = split(RawData, ',')
+| extend Timestamp = todatetime(CSVFields0[8]) 
+| extend CSVFields = replace_string(RawData, ':', ',')
+| extend CSVFields1 = split(CSVFields, ',')
+| extend Latitude = tostring(CSVFields1[1])
+| extend Longitude = tostring(CSVFields1[3]) 
+| extend Destinationhost = tostring(CSVFields1[5]) 
+| extend Username = tostring(CSVFields1[7]) 
+| extend Sourcehost = tostring(CSVFields1[9])
+| extend State = tostring(CSVFields1[11]) 
+| extend Country = tostring(CSVFields1[13]) 
+| extend Label = tostring(CSVFields1[15]) 
+
+| summarize event_count=count() by Sourcehost, Latitude, Longitude, Country, Label, Destinationhost
+| where Destinationhost != "samplehost"
+| where Sourcehost != ""
