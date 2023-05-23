@@ -107,7 +107,7 @@ After running this query we can see the new columns:
 <img src="https://snipboard.io/yXgNTu.jpg" height="80%" width="80%" alt="custom_log_table"/>
 
 <b>9. Setting up map in Sentinel</b>  <br/>
-I headed to Miscrosoft Sentinel. I went to "Workbook" and created the new one. I removed the default ones and clicked on "Addd query". I pasted my script, I created and checked in Log Analytics Workspace before. Then I added another script, selecting only the columns I want to see on the map - these are Sourcehost, Latitude, Longitude, Country, Label and Destinationhost. I did not include destionationhost which are "samplehost", as they are just samples and empty sourcehosts. Event_count counts how many times this event happened.
+I headed to Miscrosoft Sentinel. I went to "Workbook" and created the new one. I removed the default ones and clicked on "Add query". I pasted my script, I created and checked in Log Analytics Workspace before. Then I added another script, selecting only the columns I want to see on the map - these are Sourcehost, Latitude, Longitude, Country, Label and Destinationhost. I did not include destionationhost which are "samplehost", as they are just samples and empty sourcehosts. Event_count counts how many times this event happened.
 
 <img src="https://snipboard.io/5fvqlc.jpg" height="80%" width="80%" alt="all_query"/>
 
