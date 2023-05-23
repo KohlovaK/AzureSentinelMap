@@ -88,5 +88,22 @@ In "lawHoneypot1" I went to "Tables" and created new custom log. To create it, I
 
 Then we can see the logs in "Log" section when I run the query.
 <img src="https://snipboard.io/MXjeRE.jpg" height="80%" width="80%" alt="custom_log"/>
+
+"RawData" column contains the needed information. Therefore, I extracted information like country, state etc. from it, so they can be separeted columns. I wrote the query in KQL (Kusto Query Language) to seperate data included in "RawData" column and created more columns, which will be used for visualization.
+<img src="https://snipboard.io/YQRupo.jpg" height="80%" width="80%" alt="query"/>
+
+After running this query we can see the new columns:
+<img src="https://snipboard.io/yXgNTu.jpg" height="80%" width="80%" alt="custom_log_table"/>
+
+<b>Setting up map in Sentinel</b>  <br/>
+Then I headed to Miscrosoft Sentinel. I went to "Workbook" and created the new one. I removed the default ones and clicked on "Addd query". I pasted the script, I created and checked in Log Analytics Workspace before. Then I added another script, selecting only columns I want to see on the map - these are Sourcehost, Latitude, Longitude, Country, Label and Destinationhost. I did not include destionationhost which were "samplehost", as they were just samples and empty sourcehosts. Event_count counts how many times this event happened.
+
+<img src="https://snipboard.io/5fvqlc.jpg" height="80%" width="80%" alt="all_query"/>
+
+Then as a "Visualization" I chose map. For plotting the map I use Latitude/Longitude as it shows specific location of IP adress. For nice graphics I set "event_count" as "Size by" - so the country with more attacks will have bigger bubble. Colors are also based on "event_count". I also set "Metric Label" by "Label" and "Metric Value" by "event_count".
+In the end, I saved the map so I can refresh it later when more attacks occur. However, already now we can see various attacks from all the world, the most of them are coming from Russia.
+
+
+<img src="https://snipboard.io/anCbm7.jpg" height="80%" width="80%" alt="map"/>
 <br />
 <br />
