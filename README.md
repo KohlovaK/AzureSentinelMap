@@ -1,7 +1,7 @@
 <h1>Azure Sentinel Map with Live Attacks(SIEM)</h1>
 
 <h2>Description</h2>
-I set up cloud based SIEM (Azure Sentinel) and connected it to a live virtual machine acting as a honey pot. Then, I was monitoring live attacks (Remote Desktop Protocol Brute Force) from all the world through logs (which collect information such are IP adresses, countries, credentials which attackers tried to use for log in). I used a custom PowerShell script to see the attackers geolocation information, and plotted it on the Azure Sentinel Map. As the data is displayed on a map, it is easy to see where these attacks are coming from. 
+I set up cloud based SIEM (Azure Sentinel) and connected it to a live virtual machine acting as a honey pot. Then, I was monitoring live attacks (Remote Desktop Protocol Brute Force) from all the world through logs (which collect information such are IP adresses, countries, credentials which attackers tried to use for log in etc.). I used a custom PowerShell script to see geolocation information of the attackers, and plotted it on the Azure Sentinel Map. As the data is displayed on a map, it is easy to see where these attacks are coming from. 
 <br />
 In this project I did not only learned how to set this up, but it is also a strong reminder, that anything published on the Internet can be vulnerable and the attackers will try to take an advantage of it, no matter who you are, you will always be a target. The other reminder is to use strong credentials, strong passwords and not to use "admin" as a username as the most of attackers tried to use this one. It is also crucial to setup firewalls properly, so they are not opened to everything coming from the Internet.
 <br />
