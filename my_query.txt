@@ -1,23 +1,23 @@
 //comments
 //my query to create custom columns from RawData column
-//first I splitted RawData by ,
+//first I split RawData by ,
 //timestamp column contains :, so I separated it first, before replacing : with ,
 //then I replaced : with ,
-// as everything is now separated by , we can use indexes to extract data we want
+//as everything is now separated by , we can use indexes to extract data we want
 
 FAILED_RDP_WITH_GEO_CL
-| extend CSVFields0 = split(RawData, ',')
-| extend Timestamp = todatetime(CSVFields0[8]) 
-| extend CSVFields = replace_string(RawData, ':', ',')
-| extend CSVFields1 = split(CSVFields, ',')
-| extend Latitude = tostring(CSVFields1[1])
-| extend Longitude = tostring(CSVFields1[3]) 
-| extend Destinationhost = tostring(CSVFields1[5]) 
-| extend Username = tostring(CSVFields1[7]) 
-| extend Sourcehost = tostring(CSVFields1[9])
-| extend State = tostring(CSVFields1[11]) 
-| extend Country = tostring(CSVFields1[13]) 
-| extend Label = tostring(CSVFields1[15]) 
+| extend Fields0 = split(RawData, ',')
+| extend Timestamp = todatetime(Fields0[8]) 
+| extend Fields = replace_string(RawData, ':', ',')
+| extend Fields1 = split(Fields, ',')
+| extend Latitude = tostring(Fields1[1])
+| extend Longitude = tostring(Fields1[3]) 
+| extend Destinationhost = tostring(Fields1[5]) 
+| extend Username = tostring(Fields1[7]) 
+| extend Sourcehost = tostring(Fields1[9])
+| extend State = tostring(Fields1[11]) 
+| extend Country = tostring(Fields1[13]) 
+| extend Label = tostring(Fields1[15]) 
 
 //query from Josh Madakor to be used in Sentinel
 | summarize event_count=count() by Sourcehost, Latitude, Longitude, Country, Label, Destinationhost
