@@ -6,6 +6,9 @@ I setted up cloud based SIEM (Azure Sentinel) and connected it to a live virtual
 In this project I did not only learned how to set this up, but it is also a strong reminder, that anything published on the Internet can be vulnerable and the attackers will try to take an advantage of it, no matter who you are, you will always be a target. The other reminder is to use strong credentials, strong passwords and not to use "admin" as a username as the most of attackers tried to use this one. It is also crucial to setup firewalls properly, so they are not opened to everything coming from the Internet.
 <br />
 
+<h2>Tutorial from:</h2>
+For this project I followed the SIEM tutorial from Josh Madakor, the whole tutorial is available on his Youtube channel: 
+<a href="https://www.youtube.com/watch?v=RoZeVbbZ0o0&ab_channel=JoshMadakor-Tech%2CEducation%2CCareer">SIEM Tutorial</a>
 
 <h2>Languages and Utilities Used</h2>
 
@@ -82,7 +85,7 @@ To make VM more discoverable on the Internet, I turned off Windows firewall - on
 <img src="https://snipboard.io/1yUhjT.jpg" height="80%" width="80%" alt="turningOff_firewall"/>
 
 <b>7. Downloading Powershell Script:</b>  <br/>
-I coppied the Powershell script from Github link from Josh Madakor (the creator of the tutorial) and pasted it into Powershell ISE on my VM. I pasted my API key (which I mentioned above) into the script and then run it. The script looks through Event Viewer, grabs all the events which falied to log in (Event ID 4625), takes their IP addresses, sends them to ipgeolocation.io, gets geo data and creates the new log file, named: "failed_rdp.log", where we can see the data. When script runs we can see the "purple" outputs, which represent failed events.
+I coppied the Powershell script from <a href="https://github.com/joshmadakor1/Sentinel-Lab/blob/main/Custom_Security_Log_Exporter.ps1">Github link</a> from Josh Madakor (the creator of the tutorial) and pasted it into Powershell ISE on my VM. I pasted my API key (which I mentioned above) into the script and then run it. The script looks through Event Viewer, grabs all the events which falied to log in (Event ID 4625), takes their IP addresses, sends them to ipgeolocation.io, gets geo data and creates the new log file, named: "failed_rdp.log", where we can see the data. When script runs we can see the "purple" outputs, which represent failed events.
 
 <img src="https://snipboard.io/PYBRkF.jpg" height="80%" width="80%" alt="powershell"/>
 
@@ -95,7 +98,7 @@ Then we can see the logs in "Log" section, after I run the query with the name o
 
 <img src="https://snipboard.io/MXjeRE.jpg" height="80%" width="80%" alt="run_query"/>
 
-The "RawData" column contains the needed information. Therefore, I extracted information like country, state etc. from it. I wrote the query in KQL (Kusto Query Language) to separate data included in "RawData" column and created more separated columns, which will be used for a visualization.
+The "RawData" column contains the needed information. Therefore, I extracted information like country, state etc. from it. As the tutorial from Josh was created 2 years ago, and Micsrosoft Azure no loger supports custom fields feature, I came up with the following solution all by myself: I wrote the query in KQL (Kusto Query Language) to separate data included in "RawData" column and created more separated columns, which will be used for a visualization.
 
 <img src="https://snipboard.io/YQRupo.jpg" height="80%" width="80%" alt="query"/>
 
@@ -104,7 +107,7 @@ After running this query we can see the new columns:
 <img src="https://snipboard.io/yXgNTu.jpg" height="80%" width="80%" alt="custom_log_table"/>
 
 <b>9. Setting up map in Sentinel</b>  <br/>
-Then I headed to Miscrosoft Sentinel. I went to "Workbook" and created the new one. I removed the default ones and clicked on "Addd query". I pasted the script, I created and checked in Log Analytics Workspace before. Then I added another script, selecting only columns I want to see on the map - these are Sourcehost, Latitude, Longitude, Country, Label and Destinationhost. I did not include destionationhost which are "samplehost", as they are just samples and empty sourcehosts. Event_count counts how many times this event happened.
+I headed to Miscrosoft Sentinel. I went to "Workbook" and created the new one. I removed the default ones and clicked on "Addd query". I pasted my script, I created and checked in Log Analytics Workspace before. Then I added another script, selecting only the columns I want to see on the map - these are Sourcehost, Latitude, Longitude, Country, Label and Destinationhost. I did not include destionationhost which are "samplehost", as they are just samples and empty sourcehosts. Event_count counts how many times this event happened.
 
 <img src="https://snipboard.io/5fvqlc.jpg" height="80%" width="80%" alt="all_query"/>
 
