@@ -23,7 +23,7 @@ For this project I followed the SIEM tutorial from Josh Madakor, the whole tutor
 <h2>Project walk-through:</h2>
 
 <b>1. Creating Virtual Machine (Exposed):</b> <br/>
-First, I created an exposed virtual machine (VM), which is supossed to be discovered easily on the Internet, so attackers can find it. Virtual machine is named "Honeypot1".
+First, I created an exposed virtual machine (VM), which is supposed to be discovered easily on the Internet, so attackers can find it. Virtual machine is named "Honeypot1".
 
 <img src="https://snipboard.io/ARryaO.jpg" height="80%" width="80%" alt="VM"/>
 
