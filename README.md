@@ -1,9 +1,9 @@
 <h1>Azure Sentinel Map with Live Attacks(SIEM)</h1>
 
 <h2>Description</h2>
-I set up a cloud-based SIEM (Azure Sentinel) and connected it to a live virtual machine acting as a honey pot. Then, I was monitoring live attacks (Remote Desktop Protocol Brute Force) from all the world through logs (which collect information such as IP adDresses, countries, credentials which attackers tried to use for login, etc.). I used a custom PowerShell script to see geolocation information of the attackers, and plotted it on the Azure Sentinel Map. As the data is displayed on a map, it is easy to see where these attacks are coming from. 
+I set up a cloud-based SIEM (Azure Sentinel) and connected it to a live virtual machine acting as a honey pot. Then, I was monitoring live attacks (Remote Desktop Protocol Brute Force) from all over the world through logs (which collect information such as IP addresses, countries, credentials which attackers tried to use for login, etc.). I used a custom PowerShell script to see geolocation information of the attackers, and plotted it on the Azure Sentinel Map. As the data is displayed on a map, it is easy to see where these attacks are coming from. 
 <br />
-In this project I did not only learned how to set this up, but it is also a strong reminder, that anything published on the Internet can be vulnerable and the attackers will try to take advantage of it, no matter who you are, you will always be a target. The other reminder is to use strong credentials, strong passwords and obviously not to use "admin" as a username as the most of attackers tried to use this one. It is also crucial to se tup firewalls properly, so they are not open to everything coming from the Internet.
+In this project, I not only learned how to set this up, but it is also a strong reminder, that anything published on the Internet can be vulnerable and the attackers will try to take advantage of it, no matter who you are, you will always be a target. The other reminder is to use strong credentials, strong passwords and obviously not to use "admin" as a username as the most of attackers tried to use this one. It is also crucial to setup firewalls properly, so they are not open to everything coming from the Internet.
 <br />
 
 <h2>Tutorial from:</h2>
@@ -32,7 +32,7 @@ Then, instead of using a default firewall, I created the new one, which is open 
 <img src="https://snipboard.io/Q3fNRw.jpg" height="80%" width="80%" alt="firewall"/>
 
 <b>2. Creating Log Analytics Workspace:</b>  <br/>
-I created and connected logs with my virtual machine. The goal of these logs is to monitor from which countries are the attackers coming. Later, I will connect the logs with Sentinel to display locations of the attacks. Log Analytics Workspace is named "lawHoneypot1".
+I created and connected logs with my virtual machine. The goal of these logs is to monitor from which countries are the attackers coming. Later, I will connect the logs with Sentinel to display the locations of the attacks. Log Analytics Workspace is named "lawHoneypot1".
 
 <img src="https://snipboard.io/szok1j.jpg" height="80%" width="80%" alt="log"/>
 
@@ -54,7 +54,7 @@ I created Azure Sentinel and added it to my Log Analytics Workspace - "lawHoneyp
 <img src="https://snipboard.io/fodaKW.jpg" height="80%" width="80%" alt="sentinel"/>
 
 <b>4. Logging into VM with Remote Desktop:</b>  <br/>
-I copied Public IP address of VM which I will use to log in via Remote Desktop.
+I copied Public IP address of the VM which I will use to log in via Remote Desktop.
 
 <img src="https://snipboard.io/MZouJe.jpg" height="80%" width="80%" alt="copy_IP"/>
 
@@ -62,7 +62,7 @@ Then I pasted this IP address into Remote Desktop Connection and logged into VM.
 
 <img src="https://snipboard.io/TzvR4S.jpg" height="80%" width="80%" alt="remote"/>
 
-On Event Viewer on VM we can already see some attacks (Audit Failure with Event ID 4625) happening after some time.
+On Event Viewer on VM, we can already see some attacks (Audit Failure with Event ID 4625) happening after some time.
 
 <img src="https://snipboard.io/apPlLE.jpg" height="80%" width="80%" alt="event_log"/>
 
@@ -70,7 +70,7 @@ Example of Log Failure:
 
 <img src="https://snipboard.io/o0pBiG.jpg" height="80%" width="80%" alt="event_log_detail"/>
 
-Here we can see which Account the attacker was trying to use, why log in process failed and also the address from the attacker. However, it is not visible here, from which country the attacker is, and the other information.
+Here we can see which Account the attacker was trying to use, why login process failed, and also the address from the attacker. However, it is not visible here, from which country the attacker is, and the other information.
 
 <b>5. Using ipgeolocation.io:</b>  <br/>
 For finding out more specific information about country, latitude, longitude etc. of the attacker I used ipgeolocation.io. I just pasted the IP address of the attacker and could see this:
@@ -79,13 +79,13 @@ For finding out more specific information about country, latitude, longitude etc
 
 For the next steps, it is necessary to get geolocation API key (to get geo data of the attackers) - after signing up into ipgeolocation.io, I got my API key.
 
-<b>6. Turnning off Windows Firewall on VM:</b>  <br/>
+<b>6. Turning off Windows Firewall on VM:</b>  <br/>
 To make VM more discoverable on the Internet, I turned off Windows firewall - on all Domain, Private and Public profile.
 
 <img src="https://snipboard.io/1yUhjT.jpg" height="80%" width="80%" alt="turningOff_firewall"/>
 
 <b>7. Downloading Powershell Script:</b>  <br/>
-I copied the Powershell script from <a href="https://github.com/joshmadakor1/Sentinel-Lab/blob/main/Custom_Security_Log_Exporter.ps1">Github link</a> from Josh Madakor (the creator of the tutorial) and pasted it into Powershell ISE on my VM. I pasted my API key (which I mentioned above) into the script and then run it. The script looks through Event Viewer, grabs all the events which falied to log in (Event ID 4625), takes their IP addresses, sends them to ipgeolocation.io, gets geo data and creates the new log file, named: "failed_rdp.log", where we can see the data. When script runs we can see the "purple" outputs, which represent failed events.
+I copied the Powershell script from the <a href="https://github.com/joshmadakor1/Sentinel-Lab/blob/main/Custom_Security_Log_Exporter.ps1">Github link</a> from Josh Madakor (the creator of the tutorial) and pasted it into Powershell ISE on my VM. I pasted my API key (which I mentioned above) into the script and then run it. The script looks through Event Viewer, grabs all the events which failed to login (Event ID 4625), takes their IP addresses, sends them to ipgeolocation.io, gets geo data and creates the new log file, named: "failed_rdp.log", where we can see the data. When script runs we can see the "purple" outputs, which represent failed events.
 
 <img src="https://snipboard.io/PYBRkF.jpg" height="80%" width="80%" alt="powershell"/>
 
@@ -98,7 +98,7 @@ Then we can see the logs in "Log" section, after I run the query with the name o
 
 <img src="https://snipboard.io/MXjeRE.jpg" height="80%" width="80%" alt="run_query"/>
 
-The "RawData" column contains the needed information. Therefore, I extracted information like country, state etc. from it. As the tutorial from Josh was created 2 years ago, and Micsrosoft Azure no loger supports custom fields feature, I came up with the following solution by myself: I wrote the query in KQL (Kusto Query Language) to separate data included in "RawData" column and created more separated columns, which will be used for a visualization.
+The "RawData" column contains the needed information. Therefore, I extracted information like country, state etc. from it. As the tutorial from Josh was created 2 years ago, and Microsoft Azure no longer supports custom fields feature, I came up with the following solution by myself: I wrote the query in KQL (Kusto Query Language) to separate data included in "RawData" column and created more separated columns, which will be used for visualization.
 
 <img src="https://snipboard.io/YQRupo.jpg" height="80%" width="80%" alt="query"/>
 
@@ -107,12 +107,12 @@ After running this query we can see the new columns:
 <img src="https://snipboard.io/yXgNTu.jpg" height="80%" width="80%" alt="custom_log_table"/>
 
 <b>9. Setting up map in Sentinel</b>  <br/>
-I headed to Miscrosoft Sentinel. I went to "Workbook" and created the new one. I removed the default ones and clicked on "Add query". I pasted my script, I created and checked in Log Analytics Workspace before. Then I added another script, selecting only the columns I want to see on the map - these are Sourcehost, Latitude, Longitude, Country, Label and Destinationhost. I did not include destionationhost which are "samplehost", as they are just samples and empty sourcehosts. Event_count counts how many times this event happened.
+I headed to Microsoft Sentinel. I went to "Workbook" and created the new one. I removed the default ones and clicked on "Add query". I pasted my script, I created and checked in Log Analytics Workspace before. Then I added another script, selecting only the columns I want to see on the map - these are Sourcehost, Latitude, Longitude, Country, Label and Destinationhost. I did not include destionationhosts which are "samplehost", as they are just samples and empty sourcehosts. Event_count counts how many times this event happened.
 
 <img src="https://snipboard.io/5fvqlc.jpg" height="80%" width="80%" alt="all_query"/>
 
-Then as a "Visualization" I chose map. For plotting the map I used "Latitude/Longitude" as it shows specific location of IP address. For logical visualization I set "event_count" as "Size by" - so a country with more attacks will have a bigger bubble. Colors are also based on "event_count". I also set "Metric Label" by "Label" and "Metric Value" by "event_count" so we can see numbers of attacks, connected with countries, under the map.
-In the end, I saved the map so I can refresh it later when more attacks will occur. However, we can already see various attacks from all the world, the most of them are currently coming from Russia.
+Then as a "Visualization" I chose a map. For plotting the map I used "Latitude/Longitude" as it shows specific location of IP address. For logical visualization I set "event_count" as "Size by" - so a country with more attacks will have a bigger bubble. Colors are also based on "event_count". I also set "Metric Label" to "Label" and "Metric Value" to "event_count" so we can see numbers of attacks, connected with countries, under the map.
+In the end, I saved the map so I can refresh it later when more attacks will occur. However, we can already see various attacks from all the world, most of them are currently coming from Russia.
 
 <img src="https://snipboard.io/anCbm7.jpg" height="80%" width="80%" alt="map"/>
 <br />
